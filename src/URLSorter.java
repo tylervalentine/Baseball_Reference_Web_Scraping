@@ -20,8 +20,6 @@ public class URLSorter {
         String data_piece = "";
         String url;
 
-        boolean position;
-
         ArrayList<String> names;
         ArrayList<String> data;
 
@@ -54,19 +52,20 @@ public class URLSorter {
 
         data = sort(url);
         stats.clean(data);
-        System.out.println(data);
 
-        if(!stats.isBatter(data))
+        if(!stats.isBatter(data) && player_position.equalsIgnoreCase("Batter"))
         {
             System.out.println("This player is actually a pitcher. Switching data choices...");
             player_position = "Pitcher";
         }
 
-        else if(!stats.isPitcher(data))
+        if(!stats.isPitcher(data) && player_position.equalsIgnoreCase("Pitcher") )
         {
             System.out.println("This player is actually a batter. Switching data choices...");
             player_position = "Batter";
         }
+
+        System.out.println();
 
         if(player_position.equalsIgnoreCase("Batter"))
         {
