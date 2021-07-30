@@ -20,6 +20,8 @@ public class URLSorter {
         String data_piece = "";
         String url;
 
+        boolean position;
+
         ArrayList<String> names;
         ArrayList<String> data;
 
@@ -52,6 +54,7 @@ public class URLSorter {
 
         data = sort(url);
         stats.clean(data);
+        System.out.println(data);
 
         if(!stats.isBatter(data))
         {
@@ -69,6 +72,7 @@ public class URLSorter {
         {
             data_piece = stats.dataChoiceBatter(data, proper_player_name);
         }
+
         else if(player_position.equalsIgnoreCase("Pitcher"))
         {
             data_piece = stats.dataChoicePitcher(data, proper_player_name);
