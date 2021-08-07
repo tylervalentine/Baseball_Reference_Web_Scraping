@@ -9,8 +9,8 @@ public class Main {
 
             sorter.run();
 
-        } catch (IOException e) {
-            System.out.println("Could not find URL on entered player. Please try again.");
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Could not find data on entered player. Please try again.");
         }
     }
 }

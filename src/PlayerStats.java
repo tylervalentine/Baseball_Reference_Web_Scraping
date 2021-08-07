@@ -50,8 +50,6 @@ public class PlayerStats {
                         "12", "On Base Plus Slugging Plus", "On-Base Plus Slugging Plus", "OPS+", "OPS+ Stats", "On-Base Plus Slugging Plus Stats"
                 ));
 
-
-
         System.out.println("Here are Data Choices for " + name + ":");
         System.out.println("-------------------------------------------------");
         System.out.println("1. WAR Stats");
@@ -71,8 +69,7 @@ public class PlayerStats {
         System.out.print("Enter which category you want data on from " + name + ": ");
         data_category = in.nextLine();
 
-        while(!correct_answers.contains(data_category))
-        {
+        while (!correct_answers.contains(data_category)) {
             System.out.println("Invalid answer. Please try again");
             System.out.print("Enter which category you want data on from " + name + ": ");
             data_category = in.nextLine();
@@ -81,8 +78,6 @@ public class PlayerStats {
         data_piece = statMethodBatter(data_category, name, data);
 
         return data_piece;
-
-
     }
 
     public String dataChoicePitcher(ArrayList<String> data, String name)
@@ -353,6 +348,7 @@ public class PlayerStats {
         String player_first_name;
         String player_last_name;
         String proper_player_letter_one;
+        String proper_player_letter_abbraviated;
         String proper_player_letter_two;
         String rest_of_first_name;
         String rest_of_last_name;
@@ -365,7 +361,16 @@ public class PlayerStats {
         proper_player_letter_two = player_last_name.substring(0,1).toUpperCase();
         rest_of_first_name = player_first_name.substring(1);
         rest_of_last_name =  player_last_name.substring(1);
-        final_name = "" + proper_player_letter_one + rest_of_first_name + " " + proper_player_letter_two + rest_of_last_name;
+
+        if(player_first_name.charAt(1) == '.')
+        {
+            proper_player_letter_abbraviated = player_first_name.substring(2,3).toUpperCase();
+            final_name = "" + proper_player_letter_one + "." + proper_player_letter_abbraviated + "." + " " + proper_player_letter_two + rest_of_last_name;
+        }
+        else
+        {
+            final_name = "" + proper_player_letter_one + rest_of_first_name + " " + proper_player_letter_two + rest_of_last_name;
+        }
 
         return final_name;
     }
