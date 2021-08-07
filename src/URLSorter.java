@@ -1,6 +1,7 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -26,16 +27,15 @@ public class URLSorter {
         Scanner in = new Scanner(System.in);
         PlayerStats stats = new PlayerStats();
 
-        System.out.print("Enter which player you want data on (Format: (first name) (last name)): ");
+        System.out.print("Enter which player you want data on (Format: First Name Last Name): ");
         player_name = in.nextLine();
         player_name = player_name.toLowerCase();
         proper_player_name = stats.title(player_name);
         System.out.print("Is this player a batter or a pitcher? ");
         player_position = in.nextLine();
 
-        while(!player_position.equalsIgnoreCase("Batter")
-                && !player_position.equalsIgnoreCase("Pitcher"))
-        {
+        while (!player_position.equalsIgnoreCase("Batter")
+                && !player_position.equalsIgnoreCase("Pitcher")) {
             System.out.println("Invalid answer. Please try again.");
             System.out.print("Is this player a batter or a pitcher? ");
             player_position = in.nextLine();
@@ -53,35 +53,29 @@ public class URLSorter {
         data = sort(url);
         stats.clean(data);
 
-        if(!stats.isBatter(data) && player_position.equalsIgnoreCase("Batter"))
-        {
+        if (!stats.isBatter(data) && player_position.equalsIgnoreCase("Batter")) {
             System.out.println("This player is actually a pitcher. Switching data choices...");
             player_position = "Pitcher";
         }
 
-        if(!stats.isPitcher(data) && player_position.equalsIgnoreCase("Pitcher") )
-        {
+        if (!stats.isPitcher(data) && player_position.equalsIgnoreCase("Pitcher")) {
             System.out.println("This player is actually a batter. Switching data choices...");
             player_position = "Batter";
         }
 
         System.out.println();
 
-        if(player_position.equalsIgnoreCase("Batter"))
-        {
+        if (player_position.equalsIgnoreCase("Batter")) {
             data_piece = stats.dataChoiceBatter(data, proper_player_name);
-        }
-
-        else if(player_position.equalsIgnoreCase("Pitcher"))
-        {
+        } else if (player_position.equalsIgnoreCase("Pitcher")) {
             data_piece = stats.dataChoicePitcher(data, proper_player_name);
         }
+
 
         System.out.println(data_piece);
     }
 
-    public ArrayList<String> sort(String url) throws IOException
-    {
+    public ArrayList<String> sort(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         String info = doc.text();
         ArrayList<String> data = new ArrayList<>(Arrays.asList(info.split(" ")));
@@ -89,50 +83,38 @@ public class URLSorter {
         return data;
     }
 
-    public ArrayList<String> nameSorter(String name)
-    {
+    public ArrayList<String> nameSorter(String name) {
         String first_letter_player_name = "";
         String shortened_last_name = "";
         String shortened_first_name = "";
-        String [] player_name_letters;
+        String[] player_name_letters;
         ArrayList<String> sorted_names = new ArrayList<>();
         int count = 1;
         boolean whitespace = false;
 
         player_name_letters = name.split("");
 
-        for(String letter : player_name_letters)
-        {
-            if(count > 2 && whitespace)
-            {
-                if(count == 3)
-                {
+        for (String letter : player_name_letters) {
+            if (count > 2 && whitespace) {
+                if (count == 3) {
                     first_letter_player_name = letter;
                     shortened_last_name += letter;
                     count++;
-                }
-
-                else if(count != player_name_letters.length && count <= 7)
-                {
+                } else if (count != player_name_letters.length && count <= 7) {
                     shortened_last_name += letter;
                     count++;
                 }
             }
 
-            if(count == 1)
-            {
+            if (count == 1) {
                 shortened_first_name += letter;
                 count++;
-            }
-
-            else if(count == 2)
-            {
+            } else if (count == 2) {
                 shortened_first_name += letter;
                 count = 3;
             }
 
-            if(letter.equals(" "))
-            {
+            if (letter.equals(" ")) {
                 whitespace = true;
             }
         }
@@ -156,65 +138,52 @@ public class URLSorter {
         int first_num = 0;
         int second_num = 1;
 
-        String [] full_name = name.split(" ");
+        String[] full_name = name.split(" ");
         first_name = full_name[0];
         last_name = full_name[1];
 
-        if(!first_name.equals(data_first_name) || !last_name.equals(data_last_name))
-        {
+        if (!first_name.equals(data_first_name) || !last_name.equals(data_last_name)) {
 
-            while(second_num != 9)
-            {
-                url += ""+first_num+second_num+".shtml";
-                try
-                {
+            while (second_num != 9) {
+                url += "" + first_num + second_num + ".shtml";
+                try {
                     data = sort(url);
                     data_first_name = data.get(0);
                     data_last_name = data.get(1);
                     second_num++;
-                }
-
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     second_num++;
                 }
 
                 data_first_name = data_first_name.toLowerCase();
                 data_last_name = data_last_name.toLowerCase();
 
-                if(first_name.equals(data_first_name) && last_name.equals(data_last_name))
-                {
+                if (first_name.equals(data_first_name) && last_name.equals(data_last_name)) {
                     return url;
                 }
-                url = url.substring(0,52);
+                url = url.substring(0, 52);
             }
 
-            while(first_num != 9)
-            {
-                url += ""+first_num+second_num+".shtml";
+            while (first_num != 9) {
+                url += "" + first_num + second_num + ".shtml";
 
-                try
-                {
+                try {
                     data = sort(url);
                     data_first_name = data.get(0);
                     data_last_name = data.get(1);
                     first_num++;
-                }
-
-                catch (IOException e)
-                {
+                } catch (IOException e) {
                     first_num++;
                 }
 
                 data_first_name = data_first_name.toLowerCase();
                 data_last_name = data_last_name.toLowerCase();
 
-                if(first_name.equals(data_first_name) && last_name.equals(data_last_name))
-                {
+                if (first_name.equals(data_first_name) && last_name.equals(data_last_name)) {
                     return url;
                 }
 
-                url = url.substring(0,52);
+                url = url.substring(0, 52);
             }
         }
         return url + "99.shtml";

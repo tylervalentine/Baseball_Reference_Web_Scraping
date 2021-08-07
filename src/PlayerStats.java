@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -37,13 +36,18 @@ public class PlayerStats {
         String data_piece;
         ArrayList<String> correct_answers = new ArrayList<>
                 (Arrays.asList(
-                        "WAR", "Wins Above Replacement", "At Bat", "At-Bat", "AB",
-                        "Hits", "H", "Home Run", "Home-Run", "HR",
-                        "Batting Average", "BA", "Runs", "R",
-                        "Runs Batted In", "RBI", "Stolen Base", "SB",
-                        "On Base Percentage", "On-Base Percentage", "OBP",
-                        "Slugging Percentage", "SLG", "On Base Plus Slugging", "On-Base Plus Slugging", "OPS",
-                        "On Base Plus Slugging Plus", "On-Base Plus Slugging Plus", "OPS+"
+                        "1", "WAR", "Wins Above Replacement", "WAR Stats",
+                        "2", "At Bat", "At-Bat", "At Bat Stats", "At-Bat Stats", "AB",
+                        "3", "Hits", "H", "Hits Stats", "Hit Stats",
+                        "4", "Home Run", "Home-Run", "HR", "Home Run Stats",
+                        "5", "Batting Average", "BA", "Batting Average Stats",
+                        "6", "Runs", "R", "Runs Stats",
+                        "7", "Runs Batted In", "RBI", "RBI Stats", "Runs Batted In Stats",
+                        "8", "Stolen Base", "SB", "SB Stats", "Stolen Base Stats",
+                        "9", "On Base Percentage", "On-Base Percentage", "OBP", "OBP Stats", "On Base Percentage Stats",
+                        "10", "Slugging Percentage", "SLG", "SLG Stats", "Slugging Stats", "Slugging Percentage Stats",
+                        "11", "On Base Plus Slugging", "On-Base Plus Slugging", "OPS", "OPS Stats", "On Base Plus Slugging Stats",
+                        "12", "On Base Plus Slugging Plus", "On-Base Plus Slugging Plus", "OPS+", "OPS+ Stats", "On-Base Plus Slugging Plus Stats"
                 ));
 
 
@@ -89,11 +93,16 @@ public class PlayerStats {
         String data_piece;
         ArrayList<String> correct_answers = new ArrayList<String>
                 (Arrays.asList(
-                        "WAR", "Wins Above Replacement", "Win", "W", "Loss", "L",
-                        "ERA", "Earned Run Average", "Earned-Run Average",
-                        "Games", "G", "Games Started", "GS", "Save", "SV",
-                        "Innings Pitched", "IP", "Strikeout", "SO",
-                        "Walks and Hits per Inning Pitched", "WHIP"
+                        "1", "WAR", "Wins Above Replacement", "WAR Stats",
+                        "2", "Win", "W", "Win Stats",
+                        "3", "Loss", "L", "Loss Stats",
+                        "4", "ERA", "Earned Run Average", "Earned-Run Average", "ERA Stats", "Earned Run Average Stats", "Earned-Run Average Stats",
+                        "5", "Games", "G", "Games Stats",
+                        "6", "Games Started", "GS", "Games Started Stats",
+                        "7", "Save", "SV", "Save Stats",
+                        "8", "Innings Pitched", "IP", "IP Stats", "Innings Pitched Stats",
+                        "9", "Strikeout", "SO", "Strikeout Stats",
+                        "10", "Walks and Hits per Inning Pitched", "WHIP", "WHIP Stats", "Walks and Hits per Inning Pitched Stats"
         ));
 
 
@@ -131,79 +140,112 @@ public class PlayerStats {
         HitterStats hitter = new HitterStats();
 
         String final_data = "";
-        if(data_name.equalsIgnoreCase("WAR") ||
-                data_name.equalsIgnoreCase("Wins Above Replacement"))
+        if(data_name.equalsIgnoreCase("1") ||
+                data_name.equalsIgnoreCase("WAR") ||
+                data_name.equalsIgnoreCase("Wins Above Replacement") ||
+                data_name.equalsIgnoreCase("Wins Above Replacement Stats"))
         {
             final_data = hitter.warData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("AB") ||
+        else if(data_name.equalsIgnoreCase("2") ||
+                data_name.equalsIgnoreCase("AB") ||
                 data_name.equalsIgnoreCase("At Bat") ||
-                data_name.equalsIgnoreCase("At-Bat"))
+                data_name.equalsIgnoreCase("At-Bat") ||
+                data_name.equalsIgnoreCase("At Bat Stats") ||
+                data_name.equalsIgnoreCase("At-Bat Stats"))
         {
             final_data = hitter.abData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("H") ||
-                data_name.equalsIgnoreCase("Hits"))
+        else if(data_name.equalsIgnoreCase("3") ||
+                data_name.equalsIgnoreCase("H") ||
+                data_name.equalsIgnoreCase("Hits") ||
+                data_name.equalsIgnoreCase("Hits Stats") ||
+                data_name.equalsIgnoreCase("Hit Stats"))
         {
             final_data = hitter.hitData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("HR") ||
+        else if(data_name.equalsIgnoreCase("4") ||
+                data_name.equalsIgnoreCase("HR") ||
                 data_name.equalsIgnoreCase("Home Run") ||
-                data_name.equalsIgnoreCase("Home-Run"))
+                data_name.equalsIgnoreCase("Home-Run") ||
+                data_name.equalsIgnoreCase("Home Run Stats"))
         {
             final_data = hitter.hrData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("BA") ||
-                data_name.equalsIgnoreCase("Batting Average"))
+        else if(data_name.equalsIgnoreCase("5") ||
+                data_name.equalsIgnoreCase("BA") ||
+                data_name.equalsIgnoreCase("Batting Average") ||
+                data_name.equalsIgnoreCase("Batting Average Stats"))
         {
             final_data = hitter.baData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("R") ||
-                data_name.equalsIgnoreCase("Runs"))
+        else if(data_name.equalsIgnoreCase("6") ||
+                data_name.equalsIgnoreCase("R") ||
+                data_name.equalsIgnoreCase("Runs") ||
+                data_name.equalsIgnoreCase("Runs Stats"))
         {
             final_data = hitter.runData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("RBI") ||
-                data_name.equalsIgnoreCase("Runs Batted In"))
+        else if(data_name.equalsIgnoreCase("7") ||
+                data_name.equalsIgnoreCase("RBI") ||
+                data_name.equalsIgnoreCase("Runs Batted In") ||
+                data_name.equalsIgnoreCase("RBI Stats") ||
+                data_name.equalsIgnoreCase("Runs Batted In Stats"))
         {
             final_data = hitter.rbiData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("SB") ||
-                data_name.equalsIgnoreCase("Stolen Base"))
+        else if(data_name.equalsIgnoreCase("8") ||
+                data_name.equalsIgnoreCase("SB") ||
+                data_name.equalsIgnoreCase("Stolen Base") ||
+                data_name.equalsIgnoreCase("SB Stats") ||
+                data_name.equalsIgnoreCase("Stolen Base Stats"))
         {
             final_data = hitter.sbData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("OBP") ||
+        else if(data_name.equalsIgnoreCase("9") ||
+                data_name.equalsIgnoreCase("OBP") ||
                 data_name.equalsIgnoreCase("On Base Percentage") ||
-                data_name.equalsIgnoreCase("On-Base Percentage"))
+                data_name.equalsIgnoreCase("On-Base Percentage") ||
+                data_name.equalsIgnoreCase("OBP Stats") ||
+                data_name.equalsIgnoreCase("On Base Percentage Stats"))
         {
             final_data = hitter.obpData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("SLG") ||
-                data_name.equalsIgnoreCase("Slugging Percentage"))
+        else if(data_name.equalsIgnoreCase("10") ||
+                data_name.equalsIgnoreCase("SLG") ||
+                data_name.equalsIgnoreCase("Slugging Percentage") ||
+                data_name.equalsIgnoreCase("SLG Stats") ||
+                data_name.equalsIgnoreCase("Slugging Stats") ||
+                data_name.equalsIgnoreCase("Slugging Percentage Stats"))
         {
             final_data = hitter.slgData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("OPS") ||
+        else if(data_name.equalsIgnoreCase("11") ||
+                data_name.equalsIgnoreCase("OPS") ||
                 data_name.equalsIgnoreCase("On Base Plus Slugging") ||
-                data_name.equalsIgnoreCase("On-Base Plus Slugging"))
+                data_name.equalsIgnoreCase("On-Base Plus Slugging") ||
+                data_name.equalsIgnoreCase("OPS Stats") ||
+                data_name.equalsIgnoreCase("On-Base Plus Slugging Stats"))
         {
             final_data = hitter.opsData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("OPS+") ||
+        else if(data_name.equalsIgnoreCase("12") ||
+                data_name.equalsIgnoreCase("OPS+") ||
                 data_name.equalsIgnoreCase("On Base Plus Slugging Plus") ||
-                data_name.equalsIgnoreCase("On-Base Plus Slugging Plus"))
+                data_name.equalsIgnoreCase("On-Base Plus Slugging Plus") ||
+                data_name.equalsIgnoreCase("OPS+ Stats") ||
+                data_name.equalsIgnoreCase("On-Base Plus Slugging Plus Stats"))
         {
             final_data = hitter.opsPlusData(data, name);
         }
@@ -216,58 +258,87 @@ public class PlayerStats {
         PitcherStats pitcher = new PitcherStats();
 
         String final_data = "";
-        if(data_name.equalsIgnoreCase("WAR") ||
-                data_name.equalsIgnoreCase("Wins Above Replacement"))
+        if(data_name.equalsIgnoreCase("1") ||
+                data_name.equalsIgnoreCase("WAR") ||
+                data_name.equalsIgnoreCase("Wins Above Replacement") ||
+                data_name.equalsIgnoreCase("Wins Above Replacement Stats"))
         {
             final_data = pitcher.warData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("W") ||
-                data_name.equalsIgnoreCase("Win"))
+        else if(data_name.equalsIgnoreCase("2") ||
+                data_name.equalsIgnoreCase("W") ||
+                data_name.equalsIgnoreCase("Win") ||
+                data_name.equalsIgnoreCase("Win Stats"))
         {
             final_data = pitcher.winData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("L") ||
-                data_name.equalsIgnoreCase("Loss"))
+        else if(data_name.equalsIgnoreCase("3") ||
+                data_name.equalsIgnoreCase("L") ||
+                data_name.equalsIgnoreCase("Loss") ||
+                data_name.equalsIgnoreCase("Loss Stats"))
         {
             final_data = pitcher.lossData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("ERA") ||
+        else if(data_name.equalsIgnoreCase("4") ||
+                data_name.equalsIgnoreCase("ERA") ||
                 data_name.equalsIgnoreCase("Earned Run Average") ||
-                data_name.equalsIgnoreCase("Earned-Run Average"))
+                data_name.equalsIgnoreCase("Earned-Run Average") ||
+                data_name.equalsIgnoreCase("ERA Stats") ||
+                data_name.equalsIgnoreCase("Earned Run Average Stats"))
         {
             final_data = pitcher.eraData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("GS") ||
-                data_name.equalsIgnoreCase("Games Started"))
+        else if(data_name.equalsIgnoreCase("5") ||
+                data_name.equalsIgnoreCase("G") ||
+                data_name.equalsIgnoreCase("Games") ||
+                data_name.equalsIgnoreCase("Games Stats"))
         {
             final_data = pitcher.gameData(data, name);
         }
 
+        else if(data_name.equalsIgnoreCase("6") ||
+                data_name.equalsIgnoreCase("GS") ||
+                data_name.equalsIgnoreCase("Games Started") ||
+                data_name.equalsIgnoreCase("Games Started Stats"))
+        {
+            final_data = pitcher.gsData(data, name);
+        }
 
-        else if(data_name.equalsIgnoreCase("SV") ||
-                data_name.equalsIgnoreCase("Save"))
+
+        else if(data_name.equalsIgnoreCase("7") ||
+                data_name.equalsIgnoreCase("SV") ||
+                data_name.equalsIgnoreCase("Save") ||
+                data_name.equalsIgnoreCase("Save Stats"))
         {
             final_data = pitcher.svData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("IP") ||
-                data_name.equalsIgnoreCase("Innings Pitched"))
+        else if(data_name.equalsIgnoreCase("8") ||
+                data_name.equalsIgnoreCase("IP") ||
+                data_name.equalsIgnoreCase("Innings Pitched") ||
+                data_name.equalsIgnoreCase("IP Stats") ||
+                data_name.equalsIgnoreCase("Innings Pitched Stats"))
         {
             final_data = pitcher.ipData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("SO") ||
-                data_name.equalsIgnoreCase("Strikeout"))
+        else if(data_name.equalsIgnoreCase("9") ||
+                data_name.equalsIgnoreCase("SO") ||
+                data_name.equalsIgnoreCase("Strikeout") ||
+                data_name.equalsIgnoreCase("Strikeout Stats"))
         {
             final_data = pitcher.soData(data, name);
         }
 
-        else if(data_name.equalsIgnoreCase("WHIP") ||
-                data_name.equalsIgnoreCase("Walks and Hits per Inning Pitched"))
+        else if(data_name.equalsIgnoreCase("10") ||
+                data_name.equalsIgnoreCase("WHIP") ||
+                data_name.equalsIgnoreCase("Walks and Hits per Inning Pitched") ||
+                data_name.equalsIgnoreCase("WHIP Stats") ||
+                data_name.equalsIgnoreCase("Walks and Hits per Inning Pitched Stats"))
         {
             final_data = pitcher.whipData(data, name);
         }
