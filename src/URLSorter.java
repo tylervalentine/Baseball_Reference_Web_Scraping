@@ -75,11 +75,11 @@ public class URLSorter {
                     data_piece = stats.dataChoiceBatter(data, proper_player_name);
                     System.out.println(data_piece);
                     System.out.println();
-                    System.out.print("Would you like more data information on " + proper_player_name + "? ");
+                    System.out.print("Would you like more data on " + proper_player_name + "? ");
                     more_data_answer = in.nextLine();
                     while (!more_data_answer.equalsIgnoreCase("Yes") && !more_data_answer.equalsIgnoreCase("No")) {
                         System.out.println("Invalid answer. Please try again.");
-                        System.out.print("Would you like more data information on " + proper_player_name + "? ");
+                        System.out.print("Would you like more data on " + proper_player_name + "? ");
                         more_data_answer = in.nextLine();
                     }
                 }while(!more_data_answer.equalsIgnoreCase("No"));

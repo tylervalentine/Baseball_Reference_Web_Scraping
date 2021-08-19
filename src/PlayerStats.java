@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayerStats {
@@ -34,21 +33,6 @@ public class PlayerStats {
 
         String data_category;
         String data_piece;
-        ArrayList<String> correct_answers = new ArrayList<>
-                (Arrays.asList(
-                        "1", "WAR", "Wins Above Replacement", "WAR Stats",
-                        "2", "At Bat", "At-Bat", "At Bat Stats", "At-Bat Stats", "AB",
-                        "3", "Hits", "H", "Hits Stats", "Hit Stats",
-                        "4", "Home Run", "Home-Run", "HR", "Home Run Stats",
-                        "5", "Batting Average", "BA", "Batting Average Stats",
-                        "6", "Runs", "R", "Runs Stats",
-                        "7", "Runs Batted In", "RBI", "RBI Stats", "Runs Batted In Stats",
-                        "8", "Stolen Base", "SB", "SB Stats", "Stolen Base Stats",
-                        "9", "On Base Percentage", "On-Base Percentage", "OBP", "OBP Stats", "On Base Percentage Stats",
-                        "10", "Slugging Percentage", "SLG", "SLG Stats", "Slugging Stats", "Slugging Percentage Stats",
-                        "11", "On Base Plus Slugging", "On-Base Plus Slugging", "OPS", "OPS Stats", "On Base Plus Slugging Stats",
-                        "12", "On Base Plus Slugging Plus", "On-Base Plus Slugging Plus", "OPS+", "OPS+ Stats", "On-Base Plus Slugging Plus Stats"
-                ));
 
         System.out.println("Here are Data Choices for " + name + ":");
         System.out.println("-------------------------------------------------");
@@ -69,7 +53,19 @@ public class PlayerStats {
         System.out.print("Enter which category you want data on from " + name + ": ");
         data_category = in.nextLine();
 
-        while (!correct_answers.contains(data_category)) {
+        while (!data_category.equals("1") && !data_category.equals("WAR") && !data_category.equals("Wins Above Replacement") && !data_category.equals("WAR Stats") &&
+                !data_category.equals("2") && !data_category.equals("At Bat") && !data_category.equals("At-Bat") && !data_category.equals("At Bat Stats") && !data_category.equals("At-Bat Stats") && !data_category.equals("AB") &&
+                !data_category.equals("3") && !data_category.equals("Hits") && !data_category.equals("H") && !data_category.equals("Hits Stats") && !data_category.equals("Hit Stats") &&
+                !data_category.equals("4") && !data_category.equals("Home Run") && !data_category.equals("HR") && !data_category.equals("Home Run Stats") &&
+                !data_category.equals("5") && !data_category.equals("Batting Average") && !data_category.equals("BA") && !data_category.equals("Batting Average Stats") &&
+                !data_category.equals("6") && !data_category.equals("Runs") && !data_category.equals("R") && !data_category.equals("Runs Stats") &&
+                !data_category.equals("7") && !data_category.equals("Runs Batted In") && !data_category.equals("RBI") && !data_category.equals("RBI Stats") && !data_category.equals("Runs Batted In Stats") &&
+                !data_category.equals("8") && !data_category.equals("Stolen Base") && !data_category.equals("SB") && !data_category.equals("SB Stats") && !data_category.equals("Stolen Base Stats") &&
+                !data_category.equals("9") && !data_category.equals("On Base Percentage") && !data_category.equals("On-Base Percentage") && !data_category.equals("OBP") && !data_category.equals("OBP Stats") && !data_category.equals("On Base Percentage Stats") &&
+                !data_category.equals("10") && !data_category.equals("Slugging Percentage") && !data_category.equals("SLG") && !data_category.equals("SLG Stats") && !data_category.equals("Slugging Stats") && !data_category.equals("Slugging Percentage Stats") &&
+                !data_category.equals("11") && !data_category.equals("On Base Plus Slugging") && !data_category.equals("On-Base Plus Slugging") && !data_category.equals("OPS") && !data_category.equals("OPS Stats}") && !data_category.equals("On Base Plus Slugging Stats") &&
+                !data_category.equals("12") && !data_category.equals("On Base Plus Slugging Plus") && !data_category.equals("OPS+") && !data_category.equals("OPS+ Stats") && !data_category.equals("On Base Plus Slugging Plus Stats"))
+        {
             System.out.println("Invalid answer. Please try again");
             System.out.print("Enter which category you want data on from " + name + ": ");
             data_category = in.nextLine();
@@ -86,20 +82,6 @@ public class PlayerStats {
 
         String data_category;
         String data_piece;
-        ArrayList<String> correct_answers = new ArrayList<String>
-                (Arrays.asList(
-                        "1", "WAR", "Wins Above Replacement", "WAR Stats",
-                        "2", "Win", "W", "Win Stats",
-                        "3", "Loss", "L", "Loss Stats",
-                        "4", "ERA", "Earned Run Average", "Earned-Run Average", "ERA Stats", "Earned Run Average Stats", "Earned-Run Average Stats",
-                        "5", "Games", "G", "Games Stats",
-                        "6", "Games Started", "GS", "Games Started Stats",
-                        "7", "Save", "SV", "Save Stats",
-                        "8", "Innings Pitched", "IP", "IP Stats", "Innings Pitched Stats",
-                        "9", "Strikeout", "SO", "Strikeout Stats",
-                        "10", "Walks and Hits per Inning Pitched", "WHIP", "WHIP Stats", "Walks and Hits per Inning Pitched Stats"
-        ));
-
 
         System.out.println("Here are Data Choices for " + name + ":");
         System.out.println("--------------------------------------------------");
@@ -118,7 +100,16 @@ public class PlayerStats {
         System.out.print("Enter which category you want data on from " + name + ": ");
         data_category = in.nextLine();
 
-        while(!correct_answers.contains(data_category))
+        while (!data_category.equals("1") && !data_category.equals("WAR") && !data_category.equals("Wins Above Replacement") && !data_category.equals("WAR Stats") &&
+                !data_category.equals("2") && !data_category.equals("Win") && !data_category.equals("W") && !data_category.equals("Win Stats") &&
+                !data_category.equals("3") && !data_category.equals("Loss") && !data_category.equals("L") && !data_category.equals("Loss Stats") &&
+                !data_category.equals("4") && !data_category.equals("ERA") && !data_category.equals("Earned Run Average") && !data_category.equals("Earned-Run Average") && !data_category.equals("ERA Stats") && !data_category.equals("Earned Run Average Stats") && !data_category.equals("Earned-Run Average Stats") &&
+                !data_category.equals("5") && !data_category.equals("Games") && !data_category.equals("G") && !data_category.equals("Games Stats") &&
+                !data_category.equals("6") && !data_category.equals("Games Started") && !data_category.equals("GS") && !data_category.equals("Games Started Stats") &&
+                !data_category.equals("7") && !data_category.equals("Save") && !data_category.equals("SV") && !data_category.equals("Save Stats") &&
+                !data_category.equals("8") && !data_category.equals("Innings Pitched") && !data_category.equals("IP") && !data_category.equals("IP Stats") && !data_category.equals("Innings Pitched Stats") &&
+                !data_category.equals("9") && !data_category.equals("Strikeout") && !data_category.equals("SO") && !data_category.equals("Strikeout Stats") &&
+                !data_category.equals("10") && !data_category.equals("Walks and Hits per Inning Pitched") && !data_category.equals("WHIP") && !data_category.equals("WHIP Stats") && !data_category.equals("Walks and Hits per Inning Pitched Stats"))
         {
             System.out.println("Invalid answer. Please try again.");
             System.out.print("Enter which category you want data on from " + name + ": ");
