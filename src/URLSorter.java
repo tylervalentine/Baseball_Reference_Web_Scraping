@@ -1,11 +1,11 @@
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+
+import java.io.FileReader;
 
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class URLSorter {
@@ -16,7 +16,6 @@ public class URLSorter {
         String first_letter_last_name;
         String short_first_name;
         String short_last_name;
-        String player_position;
         String data_piece;
         String url;
         String more_data_answer;
@@ -24,6 +23,8 @@ public class URLSorter {
 
         ArrayList<String> names;
         ArrayList<String> data;
+
+        int season_career;
 
         Scanner in = new Scanner(System.in);
         PlayerStats stats = new PlayerStats();
@@ -33,16 +34,6 @@ public class URLSorter {
             player_name = in.nextLine();
             player_name = player_name.toLowerCase();
             proper_player_name = stats.title(player_name);
-            System.out.print("Is this player a batter or a pitcher? ");
-            player_position = in.nextLine();
-
-            while (!player_position.equalsIgnoreCase("Batter")
-                    && !player_position.equalsIgnoreCase("Pitcher")) {
-                System.out.println("Invalid answer. Please try again.");
-                System.out.print("Is this player a batter or a pitcher? ");
-                player_position = in.nextLine();
-            }
-
             System.out.println();
             System.out.println("Loading player data...");
 
@@ -57,56 +48,29 @@ public class URLSorter {
 
             data = sort(url);
             stats.clean(data);
-
-            if (!stats.isBatter(data) && player_position.equalsIgnoreCase("Batter")) {
-                System.out.println("This player is actually a pitcher. Switching data choices...");
-                player_position = "Pitcher";
-            }
-
-            if (!stats.isPitcher(data) && player_position.equalsIgnoreCase("Pitcher")) {
-                System.out.println("This player is actually a batter. Switching data choices...");
-                player_position = "Batter";
-            }
+            season_career = stats.writeFile(data, proper_player_name);
 
             System.out.println();
 
-            if (player_position.equalsIgnoreCase("Batter")) {
-                do {
-                    data_piece = stats.dataChoiceBatter(data, proper_player_name);
-                    System.out.println(data_piece);
-                    System.out.println();
+            do {
+                data_piece = stats.dataChoice(new FileReader("data.txt"), proper_player_name, season_career);
+                System.out.println(data_piece);
+                System.out.println();
+                System.out.print("Would you like more data on " + proper_player_name + "? ");
+                more_data_answer = in.nextLine();
+                while (!more_data_answer.equalsIgnoreCase("Yes") && !more_data_answer.equalsIgnoreCase("No")) {
+                    System.out.println("Invalid answer. Please try again.");
                     System.out.print("Would you like more data on " + proper_player_name + "? ");
                     more_data_answer = in.nextLine();
-                    while (!more_data_answer.equalsIgnoreCase("Yes") && !more_data_answer.equalsIgnoreCase("No")) {
-                        System.out.println("Invalid answer. Please try again.");
-                        System.out.print("Would you like more data on " + proper_player_name + "? ");
-                        more_data_answer = in.nextLine();
-                    }
-                }while(!more_data_answer.equalsIgnoreCase("No"));
-            }
+                }
+            }while(!more_data_answer.equalsIgnoreCase("No"));
 
-            else if (player_position.equalsIgnoreCase("Pitcher")) {
-                do {
-                    data_piece = stats.dataChoicePitcher(data, proper_player_name);
-                    System.out.println(data_piece);
-                    System.out.println();
-                    System.out.print("Would you like more data information on " + proper_player_name + "? ");
-                    more_data_answer = in.nextLine();
-                    while (!more_data_answer.equalsIgnoreCase("Yes") && !more_data_answer.equalsIgnoreCase("No")) {
-                        System.out.println("Invalid answer. Please try again.");
-                        System.out.print("Would you like more data information on " + proper_player_name + "? ");
-                        more_data_answer = in.nextLine();
-                    }
-                    System.out.println();
-                }while(!more_data_answer.equalsIgnoreCase("No"));
-            }
-
-            System.out.print("Would you like data information on another player? ");
+            System.out.print("Would you like data on another player? ");
             another_player_answer = in.nextLine();
 
             while (!another_player_answer.equalsIgnoreCase("Yes") && !another_player_answer.equalsIgnoreCase("No")) {
                 System.out.println("Invalid answer. Please try again.");
-                System.out.print("Would you like data information on another player? ");
+                System.out.print("Would you like data on another player? ");
                 another_player_answer = in.nextLine();
             }
 
@@ -120,15 +84,13 @@ public class URLSorter {
         System.out.println("Program terminated. Please come again!");
     }
 
-    public ArrayList<String> sort(String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
-        String info = doc.text();
-        ArrayList<String> data = new ArrayList<>(Arrays.asList(info.split(" ")));
-
-        return data;
+    public ArrayList<String> sort(String url) throws IOException
+    {
+        return new ArrayList<>(List.of(Jsoup.connect(url).get().text().split(" ")));
     }
 
-    public ArrayList<String> nameSorter(String name) {
+    public ArrayList<String> nameSorter(String name)
+    {
         String first_letter_player_name = "";
         String shortened_last_name = "";
         String shortened_first_name = "";
@@ -140,26 +102,34 @@ public class URLSorter {
         player_name_letters = name.split("");
 
         for (String letter : player_name_letters) {
-            if (count > 2 && whitespace) {
-                if (count == 3) {
+            if (count > 2 && whitespace)
+            {
+                if (count == 3)
+                {
                     first_letter_player_name = letter;
                     shortened_last_name += letter;
                     count++;
-                } else if (count != player_name_letters.length && count <= 7) {
+                }
+                else if (count != player_name_letters.length && count <= 7)
+                {
                     shortened_last_name += letter;
                     count++;
                 }
             }
 
-            if (count == 1) {
+            if (count == 1)
+            {
                 shortened_first_name += letter;
                 count++;
-            } else if (count == 2) {
+            }
+            else if (count == 2 && !letter.equals("."))
+            {
                 shortened_first_name += letter;
                 count = 3;
             }
 
-            if (letter.equals(" ")) {
+            if (letter.equals(" "))
+            {
                 whitespace = true;
             }
         }
@@ -171,7 +141,8 @@ public class URLSorter {
         return sorted_names;
     }
 
-    public String numberSorter(String url, String name) throws IOException {
+    public String numberSorter(String url, String name)
+    {
 
         String first_name;
         String last_name;
@@ -191,41 +162,51 @@ public class URLSorter {
 
             while (second_num != 9) {
                 url += "" + first_num + second_num + ".shtml";
-                try {
+                try
+                {
                     data = sort(url);
                     data_first_name = data.get(0);
                     data_last_name = data.get(1);
                     second_num++;
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     second_num++;
                 }
 
                 data_first_name = data_first_name.toLowerCase();
                 data_last_name = data_last_name.toLowerCase();
 
-                if (first_name.equals(data_first_name) && last_name.equals(data_last_name)) {
+                if (first_name.equals(data_first_name) && last_name.equals(data_last_name))
+                {
                     return url;
                 }
+
                 url = url.substring(0, 52);
             }
 
-            while (first_num != 9) {
+            while (first_num != 9)
+            {
                 url += "" + first_num + second_num + ".shtml";
 
-                try {
+                try
+                {
                     data = sort(url);
                     data_first_name = data.get(0);
                     data_last_name = data.get(1);
                     first_num++;
 
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     first_num++;
                 }
 
                 data_first_name = data_first_name.toLowerCase();
                 data_last_name = data_last_name.toLowerCase();
 
-                if (first_name.equals(data_first_name) && last_name.equals(data_last_name)) {
+                if (first_name.equals(data_first_name) && last_name.equals(data_last_name))
+                {
                     return url;
                 }
 
