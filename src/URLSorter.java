@@ -182,7 +182,7 @@ public class URLSorter {
                     return url;
                 }
 
-                url = url.substring(0, 52);
+                url = url.substring(0, url.length() - 8);
             }
 
             while (first_num != 9)
@@ -210,7 +210,7 @@ public class URLSorter {
                     return url;
                 }
 
-                url = url.substring(0, 52);
+                url = url.substring(0, url.length() - 8);
             }
         }
         return url + "99.shtml";
