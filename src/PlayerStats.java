@@ -195,46 +195,6 @@ public class PlayerStats {
         return "" + name + "'s " + season_career + " " + data_category + " is " + data_number + ".";
     }
 
-    public String title(String name) {
-        String[] full_name;
-        String player_first_name;
-        String player_last_name;
-        String proper_player_letter_one;
-        String proper_player_letter_abbraviated;
-        String proper_player_letter_two;
-        String rest_of_first_name;
-        String rest_of_last_name;
-        String final_name;
-        String third_letter;
-
-        full_name = name.split(" ");
-        player_first_name = full_name[0];
-        if(player_first_name.length() == 2)
-        {
-            player_first_name = player_first_name.toUpperCase();
-        }
-        player_last_name = full_name[1];
-        proper_player_letter_one = player_first_name.substring(0, 1).toUpperCase();
-        proper_player_letter_two = player_last_name.substring(0, 1).toUpperCase();
-        rest_of_first_name = player_first_name.substring(1);
-        rest_of_last_name = player_last_name.substring(1);
-
-        if(player_last_name.equalsIgnoreCase("LeMahieu") || player_last_name.equalsIgnoreCase("DeGrom"))
-        {
-            third_letter = player_last_name.substring(2,3).toUpperCase();
-            rest_of_last_name = player_last_name.charAt(1) + third_letter + player_last_name.substring(3);
-        }
-
-        if (player_first_name.charAt(1) == '.') {
-            proper_player_letter_abbraviated = player_first_name.substring(2, 3).toUpperCase();
-            final_name = "" + proper_player_letter_one + "." + proper_player_letter_abbraviated + "." + " " + proper_player_letter_two + rest_of_last_name;
-        } else {
-            final_name = "" + proper_player_letter_one + rest_of_first_name + " " + proper_player_letter_two + rest_of_last_name;
-        }
-
-        return final_name;
-    }
-
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
