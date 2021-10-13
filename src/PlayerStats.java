@@ -13,9 +13,11 @@ public class PlayerStats {
     public void clean(ArrayList<String> data) {
         for (int i = 0; i < data.size(); )
 
-            if (!data.get(i).equals("SUMMARY")) {
+            if (!data.get(i).equals("SUMMARY"))
+            {
                 data.remove(data.get(i));
-            } else {
+            }
+            else {
                 break;
             }
     }

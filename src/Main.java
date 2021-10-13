@@ -2,6 +2,9 @@ import java.io.IOException;
 
 public class Main {
 
+
+    //Fix duplicate name bug (Nelson Cruz Example)
+
     public static void main(String[] args)
     {
         try {
@@ -9,7 +12,8 @@ public class Main {
 
             sorter.run();
 
-        } catch (IOException | InterruptedException e) {
+        }
+        catch (IOException | InterruptedException e) {
             System.out.println("Could not find data on entered player. Please try again.");
         }
     }

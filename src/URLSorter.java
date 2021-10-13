@@ -3,10 +3,7 @@ import org.jsoup.Jsoup;
 import java.io.FileReader;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class URLSorter {
 
@@ -22,8 +19,7 @@ public class URLSorter {
         String more_data_answer;
         String another_player_answer;
 
-        String[] urlNames;
-
+        ArrayList<String> urlNames;
         ArrayList<String> names;
         ArrayList<String> data;
 
@@ -47,9 +43,9 @@ public class URLSorter {
 
             url = "https://www.baseball-reference.com/players/" + first_letter_last_name + "/" + short_last_name + short_first_name + "";
             urlNames = numberSorter(url, player_name);
-            url = urlNames[0];
-            first_name = urlNames[1];
-            last_name = urlNames[2];
+            first_name = urlNames.get(0);
+            last_name = urlNames.get(1);
+            url = duplicateNames(urlNames, first_name, last_name);
 
             data = sort(url);
             stats.clean(data);
@@ -89,7 +85,7 @@ public class URLSorter {
         System.out.println("Program terminated. Please come again!");
     }
 
-    public ArrayList<String> sort(String url) throws IOException
+    public static ArrayList<String> sort(String url) throws IOException
     {
         return new ArrayList<>(List.of(Jsoup.connect(url).get().text().split(" ")));
     }
@@ -152,20 +148,21 @@ public class URLSorter {
         return sorted_names;
     }
 
-    public String[] numberSorter(String url, String name)
+    public ArrayList<String> numberSorter(String url, String name)
     {
 
         String first_name;
         String last_name = "";
-        String data_first_name = "";
-        String data_last_name = "";
-        String[] result = new String[3];
+        String data_first_name;
+        String data_last_name;
+        ArrayList<String> result = new ArrayList<>();
 
         ArrayList<String> data;
 
         int first_num = 0;
         int second_num = 1;
-        int index = 1;
+        int index;
+        int count = 2;
 
         String[] full_name = name.split(" ");
         first_name = full_name[0];
@@ -196,10 +193,19 @@ public class URLSorter {
              }
 
              if (first_name.equals(data_first_name.toLowerCase()) && last_name.equals(data_last_name.toLowerCase())) {
-                 result[0] = url;
-                 result[1] = data_first_name;
-                 result[2] = data_last_name;
-                 return result;
+                 if (count == 2)
+                 {
+                     result.add(data_first_name);
+                     result.add(data_last_name);
+                     result.add(url);
+                     count++;
+                 }
+
+                 else
+                 {
+                     result.add(url);
+                     count++;
+                 }
              }
 
              url = url.substring(0, url.length() - 8);
@@ -223,16 +229,137 @@ public class URLSorter {
                  first_num++;
              }
              if (first_name.equals(data_first_name.toLowerCase()) && last_name.equals(data_last_name.toLowerCase())) {
-                 result[0] = url;
-                 result[1] = data_first_name;
-                 result[2] = data_last_name;
-                 return result;
+                 if (count == 2)
+                 {
+                     result.add(data_first_name);
+                     result.add(data_last_name);
+                     result.add(url);
+                     count++;
+                 }
+
+                 else
+                 {
+                     result.add(url);
+                     count++;
+                 }
              }
              url = url.substring(0, url.length() - 8);
          }
-        result[0] = url + "99.shtml";
-        result[1] = first_name;
-        result[2] = last_name;
         return result;
+    }
+
+    public static String duplicateNames(ArrayList<String> urls, String firstName, String lastName) throws IOException {
+        String url = "";
+        if(urls.size() == 3)
+        {
+            return urls.get(2);
+        }
+
+        ArrayList<String> urlList = new ArrayList<>();
+        ArrayList<String> players = new ArrayList<>();
+        ArrayList<String> data;
+
+        for(int i = 2; i < urls.size(); i++)
+        {
+            String position;
+            String yearsPlayed;
+            urlList.add(urls.get(i));
+            data = sort(urls.get(i));
+            position = playerPositionFinder(data);
+            yearsPlayed = playerYearsPlayedFinder(data);
+            players.add(firstName + " " + lastName + ":" + " " + position + ", " + yearsPlayed);
+        }
+
+        url = duplicatePlayerSelector(urlList, players);
+        return url;
+    }
+
+    public static String playerPositionFinder(ArrayList<String> data)
+    {
+        String position = "";
+        boolean position_found = false;
+
+        for(int i = 0; i < data.size(); i++)
+        {
+            int position_index = i + 1;
+
+            if(data.get(i).equals("Position:") || data.get(i).equals("Positions:"))
+            {
+                position += data.get(position_index);
+                position_found = true;
+            }
+
+            if(position_found)
+            {
+                break;
+            }
+        }
+        return position;
+    }
+
+    public static String playerYearsPlayedFinder(ArrayList<String> data)
+    {
+        String years = "";
+        boolean first_year = false, last_year  = false;
+
+        for(int i = 0; i < data.size(); i++)
+        {
+
+            if(data.get(i).equals("Debut:"))
+            {
+                years += data.get(i + 3) + "-";
+                first_year = true;
+            }
+
+            if(data.get(i).equals("Last") && data.get(i + 1).equals("Game:"))
+            {
+                years += data.get(i + 4);
+                last_year =  true;
+            }
+
+            if(first_year && last_year)
+            {
+                break;
+            }
+        }
+
+        if(first_year && !last_year)
+        {
+            years += "Present";
+        }
+
+        return years;
+    }
+
+    public static String duplicatePlayerSelector(ArrayList<String> urlList, ArrayList<String> players)
+    {
+        Scanner in = new Scanner(System.in);
+
+        String selected_player;
+        String url;
+
+        System.out.println();
+        System.out.println("Here is a list of possible players to select:");
+        System.out.println();
+
+        for(String player: players)
+        {
+            System.out.println(player);
+        }
+
+        System.out.println();
+
+        System.out.print("Select which player is the one you're looking for (include all information listed): ");
+        selected_player = in.nextLine();
+
+        while(!players.contains(selected_player))
+        {
+            System.out.println("Invalid Answer");
+            System.out.print("Select which player is the one you're looking for (include all information listed): ");
+            selected_player = in.nextLine();
+        }
+
+        url = urlList.get(players.indexOf(selected_player));
+        return url;
     }
 }
