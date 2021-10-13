@@ -197,7 +197,7 @@ public class PlayerStats {
         return "" + name + "'s " + season_career + " " + data_category + " is " + data_number + ".";
     }
 
-    public static boolean isNumeric(String strNum) {
+    public boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }

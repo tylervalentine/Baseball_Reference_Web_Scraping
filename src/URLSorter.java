@@ -281,11 +281,14 @@ public class URLSorter {
 
         for(int i = 0; i < data.size(); i++)
         {
-            int position_index = i + 1;
-
             if(data.get(i).equals("Position:") || data.get(i).equals("Positions:"))
             {
-                position += data.get(position_index);
+                position += data.get(i + 1);
+
+                if(data.get(i + 1).equals("Designated"))
+                {
+                    position += " " + data.get(i + 2);
+                }
                 position_found = true;
             }
 
@@ -294,21 +297,32 @@ public class URLSorter {
                 break;
             }
         }
+        position = position.replaceAll(",", "");
         return position;
     }
 
     public static String playerYearsPlayedFinder(ArrayList<String> data)
     {
+        PlayerStats stats = new PlayerStats();
+
         String years = "";
-        boolean first_year = false, last_year  = false;
+        boolean first_year = false, last_year  = false, still_playing = false;
 
         for(int i = 0; i < data.size(); i++)
         {
 
             if(data.get(i).equals("Debut:"))
             {
-                years += data.get(i + 3) + "-";
-                first_year = true;
+                if(stats.isNumeric(data.get(i + 1)) && data.get(i + 1).length() == 4)
+                {
+                    years += data.get(i + 1) + "-";
+                    first_year = true;
+                }
+                else
+                {
+                    years += data.get(i + 3) + "-";
+                    first_year = true;
+                }
             }
 
             if(data.get(i).equals("Last") && data.get(i + 1).equals("Game:"))
@@ -317,15 +331,27 @@ public class URLSorter {
                 last_year =  true;
             }
 
+            if(data.get(i).equals("SUMMARY") && data.get(i + 1).equals("2021"))
+            {
+                still_playing = true;
+            }
+
             if(first_year && last_year)
             {
                 break;
             }
         }
 
-        if(first_year && !last_year)
+        stats.clean(data);
+
+        if(first_year && !last_year && still_playing)
         {
             years += "Present";
+        }
+
+        else if(first_year && !last_year)
+        {
+            years += "Unknown";
         }
 
         return years;
