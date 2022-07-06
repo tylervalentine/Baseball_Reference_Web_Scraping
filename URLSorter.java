@@ -7,7 +7,8 @@ import java.util.*;
 
 public class URLSorter {
 
-    public void run() throws IOException, InterruptedException {
+    public void run() throws IOException, InterruptedException
+    {
         String player_name;
         String first_name;
         String last_name;
@@ -49,8 +50,7 @@ public class URLSorter {
 
             data = sort(url);
             stats.clean(data);
-            season_career = stats.writeFile(data, first_name + " " + last_name) ;
-
+            season_career = stats.writeFile(data, first_name + " " + last_name);
             System.out.println();
 
             do {
@@ -66,6 +66,7 @@ public class URLSorter {
                 }
             }while(!more_data_answer.equalsIgnoreCase("No"));
 
+            stats.moveFile(first_name, last_name);
             System.out.print("Would you like data on another player? ");
             another_player_answer = in.nextLine();
 
