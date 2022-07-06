@@ -101,7 +101,7 @@ public class PlayerStats {
     }
 
     public void moveFile(String first_name, String last_name) throws IOException {
-        String fromFile = "/Users/valentinet02@moravian.edu/IdeaProjects/WebScraping/data.txt";
+        String fromFile = "/Users/valentinet02@moravian.edu/Personal-Coding/Projects/Baseball_Reference_Web_Scraping/data.txt";
         String toFile = "/Users/valentinet02@moravian.edu/Personal-Coding/Projects/WebScrapingFiles/" + first_name + "" + last_name + "2022.txt";
 
         Path source = Paths.get(fromFile);
