@@ -1,0 +1,14 @@
+***Luis Robert Statistics***  
+SUMMARY 2022 Career 
+WAR 1.6 7.0 
+AB 266 743 
+H 75 215 
+HR 8 32 
+BA .282 .289 
+R 37 112 
+RBI 40 114 
+SB 11 26 
+OBP .309 .333 
+SLG .410 .475 
+OPS .719 .808 
+OPS+ 104 122 

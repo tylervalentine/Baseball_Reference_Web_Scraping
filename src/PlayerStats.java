@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import java.io.IOException;
-
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +101,7 @@ public class PlayerStats {
 
     public void moveFile(String first_name, String last_name) throws IOException {
         String fromFile = "/Users/valentinet02@moravian.edu/Personal-Coding/Projects/Baseball_Reference_Web_Scraping/data.txt";
-        String toFile = "/Users/valentinet02@moravian.edu/Personal-Coding/Projects/WebScrapingFiles/" + first_name + "" + last_name + "2022.txt";
+        String toFile = "/Users/valentinet02@moravian.edu/Personal-Coding/Projects/Baseball_Reference_Web_Scraping/players/" + first_name + "" + last_name + "2022.txt";
 
         Path source = Paths.get(fromFile);
         Path target = Paths.get(toFile);

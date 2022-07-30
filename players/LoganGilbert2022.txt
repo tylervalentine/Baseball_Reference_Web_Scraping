@@ -1,0 +1,12 @@
+***Logan Gilbert Statistics***  
+SUMMARY 2022 Career 
+WAR 2.4 3.4 
+W 10 16 
+L 3 8 
+ERA 2.61 3.73 
+G 17 41 
+GS 17 41 
+SV 0 0 
+IP 100.0 219.1 
+SO 93 221 
+WHIP 1.150 1.163 

@@ -77,13 +77,14 @@ public class URLSorter {
             }
 
             System.out.println();
-            System.out.println("Rebooting program... ");
+            System.out.println("Please wait... ");
             Thread.sleep(4000);
             System.out.println();
 
         }while(!another_player_answer.equalsIgnoreCase("No"));
 
         System.out.println("Program terminated. Please come again!");
+        in.close();
     }
 
     public static ArrayList<String> sort(String url) throws IOException

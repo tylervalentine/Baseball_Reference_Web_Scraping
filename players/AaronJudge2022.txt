@@ -1,0 +1,14 @@
+***Aaron Judge Statistics***  
+SUMMARY 2022 Career 
+WAR 3.5 29.9 
+AB 294 2362 
+H 83 654 
+HR 29 187 
+BA .282 .277 
+R 64 466 
+RBI 59 425 
+SB 6 30 
+OBP .362 .383 
+SLG .619 .562 
+OPS .981 .945 
+OPS+ 178 154 

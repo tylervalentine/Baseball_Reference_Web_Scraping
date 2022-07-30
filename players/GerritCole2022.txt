@@ -1,0 +1,12 @@
+***Gerrit Cole Statistics***  
+SUMMARY 2022 Career 
+WAR 2.2 33.5 
+W 9 126 
+L 3 66 
+ERA 3.09 3.19 
+G 20 254 
+GS 20 254 
+SV 0 0 
+IP 119.1 1568.2 
+SO 153 1826 
+WHIP 1.022 1.105 
