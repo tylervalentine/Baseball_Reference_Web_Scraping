@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "/Users/valentinet02@moravian.edu/Downloads/jsoup-1.15.2.jar"
-    ]
-}
